@@ -12,7 +12,7 @@ Lightning <- R6Class("Lightning",
       line = function(series, index = NA, color = NA, label = NA, size = NA, xaxis = NA, yaxis = NA, logScaleX = "false", logScaleY = "false") {
          listbuilder <- list(type = "line", opts = list(logScaleX = logScaleX, logScaleY = logScaleY))
          features <- list(series = series)
-         
+
          if (!is.na(index)) {
             features$index <- index
          }
@@ -31,12 +31,12 @@ Lightning <- R6Class("Lightning",
          if (!is.na(yaxis)) {
             features$yaxis <- yaxis
          }
-         
+
          listbuilder$data <- features
-         
+
          jsonbody <- toJSON(listbuilder, .na = "")
          oldbody = "placeholder"
-         
+
          while (!(jsonbody == oldbody)) {
             oldbody <- jsonbody
             jsonbody <- gsub(", ,", ",", jsonbody)
@@ -60,7 +60,7 @@ Lightning <- R6Class("Lightning",
          points[,1] <- x
          points[,2] <- y
          features <- list(points = points)
-         
+
          if (!is.na(color)) {
             features$color <- color
          }
@@ -79,7 +79,7 @@ Lightning <- R6Class("Lightning",
          if (!is.na(yaxis)) {
             features$yaxis <- yaxis
          }
-         
+
          listbuilder$data <- features
          listbuilder$opts <- c(NaN)
          jsonbody <- toJSON(listbuilder, .na = "{}")
@@ -92,12 +92,12 @@ Lightning <- R6Class("Lightning",
             browseURL(url)
          }
          self$url <- url
-         return(url)
+         return(list(url = url, id = response$id))
       },
       linestacked = function(series, color = NA, label = NA, size = NA){
          listbuilder <- list(type = "line-stacked")
          features <- list(series = series)
-         
+
          if (!is.na(color)) {
             features$color <- color
          }
@@ -107,20 +107,20 @@ Lightning <- R6Class("Lightning",
          if (!is.na(size)) {
             features$size <- size
          }
-         
+
          listbuilder$data <- features
          listbuilder$opts <- c("options")
          jsonbody <- toJSON(listbuilder, .na = "")
-         
+
          oldbody = "placeholder"
-         
+
          while (!(jsonbody == oldbody)) {
             oldbody <- jsonbody
             jsonbody <- gsub(", ,", ",", jsonbody)
          }
          jsonbody <- gsub(",  ]", " ]", jsonbody)
          jsonbody <- gsub('[ ,', '[', jsonbody, fixed = TRUE)
-         
+
          jsonbody <- gsub('"options"', "{}", jsonbody)
          httpheader<- c(Accept = "text/plain", "Content-Type" = "application/json")
          response = postForm(paste(self$serveraddress, "sessions/", self$sessionid, "/visualizations/", sep=""),
@@ -131,18 +131,18 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
-         return(url)
+         return(list(url = url, id = response$id))
       },
       force = function(matrix, color = NA, label = NA, size = NA){
          ##matrix- connectivity matrix n by n, where value is the weight of the edge
-         
+
          listbuilder <- list(type = "force", opts = NA)
          nodes <- vector(mode = "numeric", length = nrow(matrix))
          for (i in 0:(length(nodes)-1)) {
             nodes[i] <- i
          }
          features <- list(nodes = nodes)
-         
+
          ##convert matrix to links
          links <- matrix(ncol = 3, byrow = TRUE)
          for (i in 1:ncol(matrix)) {
@@ -154,7 +154,7 @@ Lightning <- R6Class("Lightning",
          }
          links <- links[-1,]
          features$links <- links
-         
+
          if (!is.na(color)) {
             features$color <- color
          }
@@ -164,9 +164,9 @@ Lightning <- R6Class("Lightning",
          if (!is.na(size)) {
             features$size <- size
          }
-         
+
          listbuilder$data <- features
-         
+
          jsonbody <- toJSON(listbuilder, .na = "{}")
          httpheader<- c(Accept = "text/plain", "Content-Type" = "application/json")
          response = postForm(paste(self$serveraddress, "sessions/", self$sessionid, "/visualizations/", sep=""),
@@ -177,7 +177,7 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
-         return(url)
+         return(list(url = url, id = response$id))
       },
       graph = function(x, y, matrix, color = NA, label = NA, size = NA) {
          listbuilder <- list(type = "graph", opts = NA)
@@ -185,7 +185,7 @@ Lightning <- R6Class("Lightning",
          points[,1] <- x
          points[,2] <- y
          features <- list(nodes = points)
-         
+
          links <- matrix(ncol = 3, byrow = TRUE)
          for (i in 1:ncol(matrix)) {
             for (j in 1:nrow(matrix)) {
@@ -196,7 +196,7 @@ Lightning <- R6Class("Lightning",
          }
          links <- links[-1,]
          features$links <- links
-         
+
          if (!is.na(color)) {
             features$color <- color
          }
@@ -206,7 +206,7 @@ Lightning <- R6Class("Lightning",
          if (!is.na(size)) {
             features$size <- size
          }
-         
+
          listbuilder$data <- features
          jsonbody <- toJSON(listbuilder, .na = "{}")
          httpheader<- c(Accept = "text/plain", "Content-Type" = "application/json")
@@ -218,7 +218,7 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
-         return(url)
+         return(list(url = url, id = response$id))
       },
       map = function(regions, weights, colormap) {
          listbuilder <- list(type = "map", opts = NA)
@@ -234,7 +234,7 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
-         return(url)
+         return(list(url = url, id = response$id))
       },
       graphbundled = function(x, y, matrix, color = NA, label = NA, size = NA){
          listbuilder <- list(type = "graph-bundled", opts = NA)
@@ -242,7 +242,7 @@ Lightning <- R6Class("Lightning",
          points[,1] <- x
          points[,2] <- y
          features <- list(nodes = points)
-         
+
          links <- matrix(ncol = 3, byrow = TRUE)
          for (i in 1:ncol(matrix)) {
             for (j in 1:nrow(matrix)) {
@@ -253,7 +253,7 @@ Lightning <- R6Class("Lightning",
          }
          links <- links[-1,]
          features$links <- links
-         
+
          if (!is.na(color)) {
             features$color <- color
          }
@@ -263,7 +263,7 @@ Lightning <- R6Class("Lightning",
          if (!is.na(size)) {
             features$size <- size
          }
-         
+
          listbuilder$data <- features
          jsonbody <- toJSON(listbuilder, .na = "{}")
          httpheader<- c(Accept = "text/plain", "Content-Type" = "application/json")
@@ -275,7 +275,7 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
-         return(url)
+         return(list(url = url, id = response$id))
       },
       matrix = function(matrix, colormap){
          listbuilder <- list(type = "matrix", opts = NA)
@@ -291,7 +291,7 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
-         return(url)
+         return(list(url = url, id = response$id))
       },
       adjacency = function (matrix, label = NA) {
          listbuilder <- list(type = "adjacency", opts = NA)
@@ -306,11 +306,11 @@ Lightning <- R6Class("Lightning",
          }
          links <- links[-1,]
          features <- list(links = links, nodes = nodes)
-         
+
          if (!is.na(label)) {
             features$label <- label
          }
-         
+
          listbuilder$data <- features
          jsonbody <- toJSON(listbuilder, .na = "{}")
          httpheader<- c(Accept = "text/plain", "Content-Type" = "application/json")
@@ -322,7 +322,7 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
-         return(url)
+         return(list(url = url, id = response$id))
       },
       scatterline = function(x, y, t, color = NA, label = NA, size = NA){
          listbuilder <- list(type = "scatter-line")
@@ -330,7 +330,7 @@ Lightning <- R6Class("Lightning",
          points[,1] <- x
          points[,2] <- y
          features <- list(points = points, series = t)
-         
+
          if (!is.na(color)) {
             features$color <- color
          }
@@ -340,19 +340,19 @@ Lightning <- R6Class("Lightning",
          if (!is.na(size)) {
             features$size <- size
          }
-         
+
          listbuilder$data <- features
          listbuilder$opts <- c("options")
          jsonbody <- toJSON(listbuilder, .na = "")
          oldbody = "placeholder"
-         
+
          while (!(jsonbody == oldbody)) {
             oldbody <- jsonbody
             jsonbody <- gsub(", ,", ",", jsonbody)
          }
          jsonbody <- gsub(",  ]", " ]", jsonbody)
          jsonbody <- gsub('[ ,', '[', jsonbody, fixed = TRUE)
-         
+
          jsonbody <- gsub('"options"', "{}", jsonbody)
          httpheader<- c(Accept = "text/plain", "Content-Type" = "application/json")
          response = postForm(paste(self$serveraddress, "sessions/", self$sessionid, "/visualizations/", sep=""),
@@ -363,7 +363,7 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
-         return(url)
+         return(list(url = url, id = response$id))
       },
       scatter3 = function(x, y, z, color = NA, label = NA, size = NA, alpha = NA) {
          listbuilder <- list(type = "scatter-3")
@@ -372,7 +372,7 @@ Lightning <- R6Class("Lightning",
          points[,2] <- y
          points[,3] <- z
          features <- list(points = points)
-         
+
          if (!is.na(color)) {
             features$color <- color
          }
@@ -385,7 +385,7 @@ Lightning <- R6Class("Lightning",
          if (!is.na(alpha)) {
             features$alpha <- alpha
          }
-         
+
          listbuilder$data <- features
          listbuilder$opts <- c(NaN)
          jsonbody <- toJSON(listbuilder, .na = "{}")
@@ -398,7 +398,7 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
-         return(url)
+         return(list(url = url, id = response$id))
       },
       createsession = function(sessionname = ""){
          jsonbody <- toJSON(list(name=sessionname))
