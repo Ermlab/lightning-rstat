@@ -1,10 +1,10 @@
 Package: LightningR
 Type: Package
 Title: Package gives tools for communication with lightningviz server
-Version: 0.2-1
+Version: 0.2-2
 Date: 2015-08-14
 Author: Ermlab
 Maintainer: Kolodziejski Kamil <kolodziejski.kamil@hotmail.com>
 Description: The purpose of this package is to enable usage of lightningviz server to be accessible from R.
 License: MIT
-Depends: RJSONIO, RCurl, R6
+Depends: RJSONIO, RCurl, R6, httr

@@ -1,3 +1,7 @@
+## POST(url = "http://localhost:3000/sessions/199/visualizations/", encode = 'multipart', body = list(file = upload_file("/home/kamil/image.png"), data = list(type = 'image')))
+## POST(url = "http://localhost:3000/sessions/201/visualizations/", encode = 'multipart', body = list(file = upload_file("/home/kamil/image.png"), type = "gallery"))
+
+
 Lightning <- R6Class("Lightning",
    public = list(
       serveraddress = NA,
@@ -395,6 +399,33 @@ Lightning <- R6Class("Lightning",
          response = fromJSON(response)
          url <- paste(self$serveraddress, "visualizations/", response$id, "/", sep="")
          self$url <- url
+         if (self$autoopen) {
+            browseURL(url)
+         }
+         return(list(url = url, id = response$id))
+      },
+      image = function(imgpath) {
+         rawresponse <- POST(url = paste(self$serveraddress, "sessions/", self$sessionid, "/visualizations/", sep=""), encode = 'multipart', body = list(file = upload_file(imgpath), type = "image"))
+         jsonstring <- rawToChar(rawresponse$content)
+         response <- fromJSON(jsonstring)
+         url <- paste(self$serveraddress, "visualizations/", response$id, "/", sep="")
+         self$url <- url
+         if (self$autoopen) {
+            browseURL(url)
+         }
+         return(list(url = url, id = response$id))
+      },
+      gallery = function(imgpathvector) {
+         firstpath <- imgpathvector[1]
+         otherpaths <- imgpathvector[-1]
+         rawresponse <- POST(url = paste(self$serveraddress, "sessions/", self$sessionid, "/visualizations/", sep=""), encode = 'multipart', body = list(file = upload_file(firstpath), type = "gallery"))
+         jsonstring <- rawToChar(rawresponse$content)
+         response <- fromJSON(jsonstring)
+         url <- paste(self$serveraddress, "visualizations/", response$id, "/", sep="")
+         self$url <- url
+         for (var in otherpaths) {
+            POST(url = paste(self$serveraddress, "sessions/", self$sessionid, "/visualizations/", response$id, "/data/images/", sep=""), encode = 'multipart', body = list(file = upload_file(var), type = "image"))
+         }
          if (self$autoopen) {
             browseURL(url)
          }
