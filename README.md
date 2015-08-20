@@ -1,7 +1,9 @@
-# lightining-rstat
+# lightning-rstat
 R client for the lightning-viz server API http://lightning-viz.org/
 
 ## Installation
+
+To use this package you have to setup your own lightning server. The package by itself will not create/display any visualisations. Instructions on how to deploy your own lightning server are available at http://lightning-viz.org/documentation/#server
 
 Clone the repository and build your package using RStudio, or download the newest binary:
 
@@ -55,6 +57,7 @@ disableautoopening()            -   disables auto opening of created plots
 ### Plots
 
 #### line(series, ...)
+![Alt text](/../screenshots/plots/line.png?raw=true)
 ```
 line(series, [index, color, label, size, xaxis, yaxis, logScaleX, logScaleY])
 Parameters: series  - vector or matrix of data for plot, each row of the matrix is plotted as another line. If lines are of different size, put NaN in empty fields
@@ -68,6 +71,7 @@ Parameters: series  - vector or matrix of data for plot, each row of the matrix 
             logScaleY - logical, sets Y axis to logarythmic scale
 ```
 #### scatter(x, y, ...)
+![Alt text](/../screenshots/plots/scatter.png?raw=true)
 ```
 scatter(x, y, [color, label, size, alpha, xaxis, yaxis])
 Parameters: x     - vector of x coordinates for points
@@ -80,6 +84,7 @@ Parameters: x     - vector of x coordinates for points
             yaxis - label for yaxis
 ```
 #### linestacked(series, ...)
+![Alt text](/../screenshots/plots/linestacked.png?raw=true)
 ```
 linestacked(series, [color, label, size])
 Parameters: series  - matrix of data for lines, where each row represents a single line
@@ -88,6 +93,7 @@ Parameters: series  - matrix of data for lines, where each row represents a sing
             size    - vector of line thickness values
 ```
 #### force(matrix, ...)
+![Alt text](/../screenshots/plots/force.png?raw=true)
 ```
 force(matrix, [color, label, size])
 Parameters: matrix  - connectivity matrix, binary or weighted
@@ -96,6 +102,7 @@ Parameters: matrix  - connectivity matrix, binary or weighted
             size    - vector of point size values
 ```
 #### graph(x, y, matrix, ...)
+![Alt text](/../screenshots/plots/graph.png?raw=true)
 ```
 graph(x, y, matrix, [color, label, size])
 Parameters: x       - vector of x coordinates for points
@@ -106,6 +113,7 @@ Parameters: x       - vector of x coordinates for points
             size    - vector of point size values
 ```
 #### graphbundled(x, y, matrix, ...)
+![Alt text](/../screenshots/plots/graphbundled.png?raw=true)
 ```
 graphbundled(x, y, matrix, [color, label, size])
 Parameters: x       - vector of x coordinates for points
@@ -116,6 +124,7 @@ Parameters: x       - vector of x coordinates for points
             size    - vector of point size values
 ```
 #### map(regions, weights, colormap)
+![Alt text](/../screenshots/plots/map.png?raw=true)
 ```
 map(regions, weights, colormap)
 Parameters: regions   - vector or region abbreviations (3-chars for countries, 2-chars for states in USA)
@@ -123,12 +132,14 @@ Parameters: regions   - vector or region abbreviations (3-chars for countries, 2
             colormap  - colorbrewer string for type of map coloring
 ```
 #### matrix(matrix, colormap)
+![Alt text](/../screenshots/plots/matrix.png?raw=true)
 ```
 matrix(matrix, colormap)
 Parameters: matrix    - matrix to visualise as a heat map
             colormap  - colorbrewer string for type of map coloring
 ```
 #### adjacency(matrix, ...)
+![Alt text](/../screenshots/plots/adjacency.png?raw=true)
 ```
 adjacency(matrix, [label])
 Parameters: matrix  - adjacency matrix data
@@ -138,6 +149,7 @@ Parameters: matrix  - adjacency matrix data
 ### Linked
 
 #### scatterline(x, y, t, ...)
+![Alt text](/../screenshots/plots/scatterline.png?raw=true)
 ```
 scatterline(x, y, t, [color, label, size])
 Parameters: x     - vector of x coordinates for points
@@ -150,6 +162,7 @@ Parameters: x     - vector of x coordinates for points
 ```
 
 ### 3D
+![Alt text](/../screenshots/plots/scatter3.png?raw=true)
 
 #### scatter3(x, y, z, ...)
 ```
