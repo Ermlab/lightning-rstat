@@ -5,6 +5,7 @@ R client for the lightning-viz server API http://lightning-viz.org/
 
 To use this package you have to setup your own lightning server. The package by itself will not create/display any visualisations. Instructions on how to deploy your own lightning server are available at http://lightning-viz.org/documentation/#server
 
+### From this repository
 Clone the repository and build your package using RStudio, or download the newest binary:
 
 ```
@@ -16,6 +17,12 @@ Then run command
 ```
 install.packages(<path to file>, repos = NULL)
 ```
+### From Cran
+Run command
+```
+install.packages("LightningR")
+```
+
 ## Usage
 ### create visualization
 To create your first visualisation, you need to create an object of a Lightning class, installed with this package.
