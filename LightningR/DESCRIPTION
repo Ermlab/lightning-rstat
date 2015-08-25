@@ -1,0 +1,14 @@
+Package: LightningR
+Type: Package
+Title: Tools for communication with lightning-viz server
+Version: 1.0
+Date: 2015-08-14
+Author: Ermlab
+Maintainer: Kolodziejski Kamil <kolodziejski.kamil@hotmail.com>
+Description: The purpose of this package is to enable usage of lightningviz server to be accessible from R. The
+   server itself can be found at http://lightning-viz.org/ and is required to work with this package. Package
+   by itself cannot and will not create any visualizations.
+License: MIT + file LICENSE
+Depends: RJSONIO, RCurl, R6, httr
+URL: https://github.com/Ermlab/lightining-rstat/
+BugReports: https://github.com/Ermlab/lightining-rstat/issues
