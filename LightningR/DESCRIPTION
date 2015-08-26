@@ -1,7 +1,7 @@
 Package: LightningR
 Type: Package
-Title: Tools for communication with lightning-viz server
-Version: 1.0
+Title: Tools for Communication with Lightning-Viz Server
+Version: 1.0.1
 Date: 2015-08-14
 Author: Ermlab
 Maintainer: Kolodziejski Kamil <kolodziejski.kamil@hotmail.com>
