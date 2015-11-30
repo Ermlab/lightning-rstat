@@ -99,7 +99,7 @@ Lightning <- R6Class("Lightning",
             browseURL(url)
          }
          if(self$notebook) {
-            return(getURL(paste(url, "embed")))
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
          }
          return(list(url = url, id = response$id))
       },
@@ -141,6 +141,9 @@ Lightning <- R6Class("Lightning",
             browseURL(url)
          }
          self$url <- url
+         if(self$notebook) {
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
+         }
          return(list(url = url, id = response$id))
       },
       linestacked = function(series, color = NA, label = NA, size = NA){
@@ -179,6 +182,9 @@ Lightning <- R6Class("Lightning",
          self$url <- url
          if (self$autoopen) {
             browseURL(url)
+         }
+         if(self$notebook) {
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
          }
          return(list(url = url, id = response$id))
       },
@@ -226,6 +232,9 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
+         if(self$notebook) {
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
+         }
          return(list(url = url, id = response$id))
       },
       graph = function(x, y, matrix, color = NA, label = NA, size = NA) {
@@ -267,6 +276,9 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
+         if(self$notebook) {
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
+         }
          return(list(url = url, id = response$id))
       },
       map = function(regions, weights, colormap) {
@@ -282,6 +294,9 @@ Lightning <- R6Class("Lightning",
          self$url <- url
          if (self$autoopen) {
             browseURL(url)
+         }
+         if(self$notebook) {
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
          }
          return(list(url = url, id = response$id))
       },
@@ -323,6 +338,9 @@ Lightning <- R6Class("Lightning",
          self$url <- url
          if (self$autoopen) {
             browseURL(url)
+         }
+         if(self$notebook) {
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
          }
          return(list(url = url, id = response$id))
       },
@@ -371,6 +389,9 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
+         if(self$notebook) {
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
+         }
          return(list(url = url, id = response$id))
       },
       scatterline = function(x, y, t, color = NA, label = NA, size = NA){
@@ -412,6 +433,9 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
+         if(self$notebook) {
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
+         }
          return(list(url = url, id = response$id))
       },
       scatter3 = function(x, y, z, color = NA, label = NA, size = NA, alpha = NA) {
@@ -447,6 +471,9 @@ Lightning <- R6Class("Lightning",
          if (self$autoopen) {
             browseURL(url)
          }
+         if(self$notebook) {
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
+         }
          return(list(url = url, id = response$id))
       },
       image = function(imgpath) {
@@ -457,6 +484,9 @@ Lightning <- R6Class("Lightning",
          self$url <- url
          if (self$autoopen) {
             browseURL(url)
+         }
+         if(self$notebook) {
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
          }
          return(list(url = url, id = response$id))
       },
@@ -473,6 +503,9 @@ Lightning <- R6Class("Lightning",
          }
          if (self$autoopen) {
             browseURL(url)
+         }
+         if(self$notebook) {
+            return(display_html(getURLContent(paste(url, "embed/", sep=""))))
          }
          return(list(url = url, id = response$id))
       },
