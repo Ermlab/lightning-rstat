@@ -45,12 +45,15 @@ Lightning <- R6Class("Lightning",
    public = list(
       serveraddress = NA,
       sessionid = NA,
+      notebook = NA,
       url = NA,
       autoopen = FALSE,
-      initialize = function(serveraddress) {
+      initialize = function(serveraddress, notebook = F) {
          if(!missing(serveraddress)){
             self$serveraddress <- serveraddress
          }
+
+         self$notebook = notebook
       },
       line = function(series, index = NA, color = NA, label = NA, size = NA, xaxis = NA, yaxis = NA, logScaleX = "false", logScaleY = "false") {
          listbuilder <- list(type = "line", opts = list(logScaleX = logScaleX, logScaleY = logScaleY))
@@ -94,6 +97,9 @@ Lightning <- R6Class("Lightning",
          self$url <- url
          if (self$autoopen) {
             browseURL(url)
+         }
+         if(self$notebook) {
+            return(getURL(paste(url, "embed")))
          }
          return(list(url = url, id = response$id))
       },
