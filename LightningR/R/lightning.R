@@ -476,7 +476,7 @@ Lightning <- R6Class("Lightning",
          response = postForm(paste(self$serveraddress, "sessions/", sep=""),
                              .opts = list(httpheader = httpheader, postfields=jsonbody))
          response = fromJSON(response)
-         self$sessionid <- response$id
+         self$sessionid <- response["id"]
          return(response)
       },
       usesession = function(sessionid){
