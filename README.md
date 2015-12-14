@@ -9,7 +9,7 @@ To use this package you have to setup your own lightning server. The package by 
 Clone the repository and build your package using RStudio, or download the newest binary:
 
 
-[LightningR](https://github.com/Ermlab/lightning-rstat/raw/master/LightningR_1.0.tar.gz)
+[LightningR](https://github.com/Ermlab/lightning-rstat/raw/master/LightningR_1.0.2.tar.gz)
 
 
 Then run command
