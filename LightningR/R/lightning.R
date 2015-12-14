@@ -16,9 +16,10 @@
 #' @field sessionid Stores id of your current session on the server.
 #' @field url Stores url of the last visualization created by this object.
 #' @field autoopen Checks if the server is automatically opening the visualizations.
+#' @field notebook Checks if the server is in the jupyter notebook mode.
 #' #' @section Methods:
 #' \describe{
-#'   \item{Documentation}{For full documentation of each method go to https://github.com/Ermlab/lightining-rstat/}
+#'   \item{Documentation}{For full documentation of each method go to https://github.com/lightning-viz/lightining-r/}
 #'   \item{\code{new(serveraddress)}}{This method is used to create object of this class with \code{serveraddress} as address of the server object is connecting to.}
 #'
 #'   \item{\code{sethost(serveraddress)}}{This method changes server that you are contacting with to \code{serveraddress}.}
